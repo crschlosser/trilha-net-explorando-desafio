@@ -17,7 +17,15 @@ namespace DesafioProjetoHospedagem.Models
         {
             // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
             // *IMPLEMENTE AQUI*
-            if (true)
+            int numeroHospedes=hospedes.Count;
+            int capacidadeSuite=Suite.Capacidade;
+
+            Console.WriteLine("LISTA DAS RESERVAS SOLICITADAS ===================================");
+            Console.WriteLine($"Tipo de Suite: {Suite.TipoSuite} - Qtde Hospedes: {numeroHospedes} - Dias Reservados: {DiasReservados}");
+            Console.WriteLine("==================================================================");
+            Console.WriteLine("   ");
+
+            if (numeroHospedes<=capacidadeSuite)
             {
                 Hospedes = hospedes;
             }
@@ -25,6 +33,14 @@ namespace DesafioProjetoHospedagem.Models
             {
                 // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
                 // *IMPLEMENTE AQUI*
+                Console.WriteLine("   ");
+                Console.WriteLine("********************************************************************");
+                Console.WriteLine("  ERRO AO FAZER RESERVA");
+                Console.WriteLine("********************************************************************");
+                Console.WriteLine($"A quantidade de hospedes excedeu a capacidade da suite em "+(numeroHospedes-capacidadeSuite)+" hospedes");
+                Console.WriteLine("********************************************************************");
+                throw new ArgumentException("O número de hospedes excedem a capacidade da suite");
+
             }
         }
 
@@ -37,7 +53,7 @@ namespace DesafioProjetoHospedagem.Models
         {
             // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
             // *IMPLEMENTE AQUI*
-            return 0;
+            return (Hospedes.Count);
         }
 
         public decimal CalcularValorDiaria()
@@ -46,14 +62,15 @@ namespace DesafioProjetoHospedagem.Models
             // Cálculo: DiasReservados X Suite.ValorDiaria
             // *IMPLEMENTE AQUI*
             decimal valor = 0;
+            decimal valorAPagar=Suite.ValorDiaria*DiasReservados;
 
             // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
             // *IMPLEMENTE AQUI*
-            if (true)
+            if (valorAPagar>100)
             {
-                valor = 0;
+                valorAPagar=valorAPagar-valorAPagar*10/100;
             }
-
+            valor=valorAPagar;
             return valor;
         }
     }
